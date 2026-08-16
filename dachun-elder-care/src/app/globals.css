@@ -1,0 +1,261 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* 品牌色 —— 强制规范色值 */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-pale: var(--primary-pale);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-danger: var(--danger);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-destructive: var(--destructive);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-sans:
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', ui-sans-serif,
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  --font-serif:
+    'Noto Serif SC', 'Songti SC', 'SimSun', ui-serif, Georgia, Cambria,
+    'Times New Roman', Times, serif;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* 强制色值 */
+  --primary: #c8c978;        /* 品牌主色（Logo 主色、主要按钮、高亮卡片背景） */
+  --primary-foreground: #7a8045; /* 主按钮上的深绿字 */
+  --primary-dark: #7a8045;   /* 辅助深绿（导航文字、深绿按钮、主标题、页脚） */
+  --primary-light: #a8ad68;  /* 辅助浅绿（信息卡片背景） */
+  --primary-pale: #b4b65f;   /* 辅助浅色 */
+
+  --accent: #e8a268;         /* 温馨提示橙 */
+  --accent-foreground: #ffffff;
+
+  --danger: #c84b3a;
+
+  --background: #f6f6e8;     /* 页面米色背景 */
+  --foreground: #333333;     /* 正文 */
+  --card: #ffffff;
+  --card-foreground: #333333;
+  --popover: #ffffff;
+  --popover-foreground: #333333;
+
+  --secondary: #a8ad68;      /* 辅助浅绿卡片背景 */
+  --secondary-foreground: #ffffff;
+  --muted: #ececd8;
+  --muted-foreground: #666666; /* 次要文字 */
+
+  --border: #d8d8d8;         /* 描边/禁用 */
+  --input: #d8d8d8;
+  --ring: #7a8045;
+
+  --destructive: #c84b3a;
+
+  --chart-1: #c8c978;
+  --chart-2: #7a8045;
+  --chart-3: #a8ad68;
+  --chart-4: #e8a268;
+  --chart-5: #b4b65f;
+
+  --sidebar: #f6f6e8;
+  --sidebar-foreground: #333333;
+  --sidebar-primary: #7a8045;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8eab8;
+  --sidebar-accent-foreground: #7a8045;
+  --sidebar-border: #d8d8d8;
+  --sidebar-ring: #7a8045;
+}
+
+.dark {
+  --background: #2a2d1a;
+  --foreground: #f3f3e0;
+  --card: #363a22;
+  --card-foreground: #f3f3e0;
+  --primary: #c8c978;
+  --primary-foreground: #2a2d1a;
+  --primary-dark: #a8ad68;
+  --muted-foreground: #c4c4a8;
+  --border: #4a4e30;
+  --ring: #c8c978;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* 锚点跳转时为固定导航栏留出空间 */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--foreground);
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+    }
+  }
+
+  /* 统一焦点样式，键盘导航可见 */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--primary-dark);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold tracking-tight;
+    color: var(--primary-dark);
+  }
+}
+
+@layer components {
+  /* 容器 */
+  .container-page {
+    @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6;
+  }
+
+  /* 主按钮：视觉稿 Hero「开始使用」深绿底白字胶囊按钮 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-[28px] bg-primary-dark px-8 py-3.5 text-lg font-bold text-white shadow-[0_6px_18px_rgba(122,128,69,0.28)] transition-all duration-300 ease-out hover:bg-[#636837] hover:shadow-[0_8px_24px_rgba(122,128,69,0.36)] hover:-translate-y-0.5 active:translate-y-0;
+    min-height: 52px;
+  }
+
+  /* 深绿按钮（导航"立即咨询"等） */
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-[28px] bg-primary-dark px-7 py-2.5 text-base font-bold text-white shadow-[0_4px_12px_rgba(122,128,69,0.28)] transition-all duration-300 ease-out hover:bg-[#636837] hover:-translate-y-0.5;
+    min-height: 44px;
+  }
+
+  /* 次按钮：白底 + 深灰描边 + 深灰字（Hero「了解服务」） */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-[28px] border border-[#666666] bg-white px-8 py-3.5 text-lg font-bold text-[#333333] transition-all duration-300 ease-out hover:border-primary-dark hover:text-primary-dark active:scale-[0.98];
+    min-height: 52px;
+  }
+
+  /* 温馨提示橙按钮（一键热线） */
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-[28px] bg-accent px-8 py-3.5 text-lg font-bold text-white shadow-[0_4px_14px_rgba(232,162,104,0.35)] transition-all duration-300 ease-out hover:brightness-95 hover:-translate-y-0.5;
+    min-height: 52px;
+  }
+
+  /* 卡片 */
+  .card-surface {
+    @apply rounded-2xl bg-card p-8 shadow-[0_4px_20px_rgba(51,51,51,0.06)] ring-1 ring-border/70 transition-all duration-300 ease-out;
+  }
+  .card-surface:hover {
+    @apply -translate-y-1 shadow-[0_10px_32px_rgba(51,51,51,0.12)] ring-primary-dark/30;
+  }
+
+  /* 板块标题 */
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-base font-bold uppercase tracking-[0.2em] text-primary-dark;
+  }
+
+  .section-title {
+    @apply mt-3 text-3xl font-bold leading-tight text-primary-dark md:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-4 text-lg text-muted-foreground max-w-2xl;
+  }
+
+  .leaf-divider {
+    @apply mx-auto mt-6 h-[3px] w-20 rounded-full bg-primary;
+  }
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-hero-pattern {
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(200, 201, 120, 0.28) 0, transparent 42%),
+      radial-gradient(circle at 82% 28%, rgba(168, 173, 104, 0.22) 0, transparent 40%),
+      radial-gradient(circle at 50% 92%, rgba(122, 128, 69, 0.1) 0, transparent 50%);
+  }
+
+  .bg-warm-texture {
+    background-color: #f6f6e8;
+    background-image:
+      radial-gradient(rgba(122, 128, 69, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
