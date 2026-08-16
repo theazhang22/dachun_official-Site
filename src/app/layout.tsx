@@ -7,8 +7,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: '大椿助老 | 社区嵌入式养老服务 · 您家门口的养老管家',
-    template: '%s | 大椿助老',
+    default: '大椿科技助老',
+    template: '%s',
   },
   description:
     '大椿助老扎根社区，为 60+ 长辈提供助餐助浴、陪同就医、康复护理、日间照料、心理慰藉等 30+ 项专业服务。24 小时响应、持证护理、家属手机可视。助老热线 18664353853。',
