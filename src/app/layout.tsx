@@ -7,8 +7,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: '大椿助老 | 社区嵌入式养老服务 · 您家门口的养老管家',
-    template: '%s | 大椿助老',
+    default: '大椿科技助老',
+    template: '%s',
   },
   description:
     '大椿助老扎根社区，为 60+ 长辈提供助餐助浴、陪同就医、康复护理、日间照料、心理慰藉等 30+ 项专业服务。24 小时响应、持证护理、家属手机可视。助老热线 18664353853。',
@@ -25,6 +25,14 @@ export const metadata: Metadata = {
     '养老管家',
   ],
   authors: [{ name: '大椿助老' }],
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
+  },
   openGraph: {
     title: '大椿助老 | 让每一位长辈在熟悉的社区里安享晚年',
     description:
