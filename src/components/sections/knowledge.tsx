@@ -1,3 +1,7 @@
+'use client';
+
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import {
   HeartPulse,
   Apple,
@@ -5,36 +9,46 @@ import {
   ShieldAlert,
   ArrowRight,
   Quote,
-} from "lucide-react";
+} from 'lucide-react';
 
-const CATEGORIES = [
+interface CategoryItem {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  bg: string;
+  iconWrap: string;
+  href?: string;
+}
+
+const CATEGORIES: CategoryItem[] = [
   {
     icon: <HeartPulse size={32} strokeWidth={2} />,
-    title: "银发健康",
-    desc: "慢病养护、安全用药、体检解读，守护长辈身心健康。",
-    bg: "bg-[#F6F6E8]",
-    iconWrap: "bg-[#C8C978] text-[#7A8045]",
+    title: '银发健康',
+    desc: '慢病养护、安全用药、体检解读，守护长辈身心健康。',
+    bg: 'bg-[#F6F6E8]',
+    iconWrap: 'bg-[#C8C978] text-[#7A8045]',
   },
   {
     icon: <Apple size={32} strokeWidth={2} />,
-    title: "饮食营养",
-    desc: "膳食搭配、老年食谱、慢病食疗，吃出均衡营养。",
-    bg: "bg-[#EDF1DC]",
-    iconWrap: "bg-[#7A8045] text-white",
+    title: '饮食营养',
+    desc: '膳食搭配、老年食谱、慢病食疗，吃出均衡营养。',
+    bg: 'bg-[#EDF1DC]',
+    iconWrap: 'bg-[#7A8045] text-white',
   },
   {
     icon: <Baby size={32} strokeWidth={2} />,
-    title: "隔代育儿",
-    desc: "科学喂养、育儿技巧、亲子沟通，助力和谐隔代相处。",
-    bg: "bg-[#F6F6E8]",
-    iconWrap: "bg-[#C8C978] text-[#7A8045]",
+    title: '隔代育儿',
+    desc: '科学喂养、育儿技巧、亲子沟通，助力和谐隔代相处。',
+    bg: 'bg-[#F6F6E8]',
+    iconWrap: 'bg-[#C8C978] text-[#7A8045]',
+    href: '/knowledge/yuer',
   },
   {
     icon: <ShieldAlert size={32} strokeWidth={2} />,
-    title: "防骗安全",
-    desc: "辨识各类骗局、警惕虚假推销，守住养老积蓄。",
-    bg: "bg-[#EDF1DC]",
-    iconWrap: "bg-[#7A8045] text-white",
+    title: '防骗安全',
+    desc: '辨识各类骗局、警惕虚假推销，守住养老积蓄。',
+    bg: 'bg-[#EDF1DC]',
+    iconWrap: 'bg-[#7A8045] text-white',
   },
 ];
 
@@ -56,31 +70,50 @@ export function Knowledge() {
 
         {/* 4 个分类卡片：横排一排 */}
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 md:mt-14">
-          {CATEGORIES.map((cat) => (
-            <article
-              key={cat.title}
-              className="group flex flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#E8E4D0] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-primary-dark/30"
-            >
+          {CATEGORIES.map((cat) => {
+            const isLink = !!cat.href;
+            return (
               <div
-                className={`flex h-20 w-20 items-center justify-center self-center rounded-2xl ${cat.iconWrap} transition-transform duration-300 group-hover:scale-105`}
+                key={cat.title}
+                className={cn(
+                  'flex flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[#E8E4D0]',
+                  isLink
+                    ? 'group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-primary-dark/30'
+                    : 'opacity-70',
+                )}
               >
-                {cat.icon}
+                <div
+                  className={cn(
+                    'flex h-20 w-20 items-center justify-center self-center rounded-2xl',
+                    cat.iconWrap,
+                    isLink && 'transition-transform duration-300 group-hover:scale-105',
+                    !isLink && 'grayscale',
+                  )}
+                >
+                  {cat.icon}
+                </div>
+                <h3 className="mt-5 text-center text-xl font-bold text-[#333333]">
+                  {cat.title}
+                </h3>
+                <p className="mt-3 text-center text-[15px] leading-relaxed text-[#666666]">
+                  {cat.desc}
+                </p>
+                {isLink ? (
+                  <Link
+                    href={cat.href as string}
+                    className="mt-5 inline-flex items-center justify-center gap-1 text-base font-bold text-primary-dark transition group-hover:gap-2"
+                  >
+                    开始答题
+                    <ArrowRight size={17} strokeWidth={2.5} />
+                  </Link>
+                ) : (
+                  <span className="mt-5 inline-flex items-center justify-center text-base font-medium text-[#9A9380]">
+                    即将上线
+                  </span>
+                )}
               </div>
-              <h3 className="mt-5 text-center text-xl font-bold text-[#333333]">
-                {cat.title}
-              </h3>
-              <p className="mt-3 text-center text-[15px] leading-relaxed text-[#666666]">
-                {cat.desc}
-              </p>
-              <a
-                href="#contact"
-                className="mt-5 inline-flex items-center justify-center gap-1 text-base font-bold text-primary-dark transition hover:gap-2"
-              >
-                查看内容
-                <ArrowRight size={17} strokeWidth={2.5} />
-              </a>
-            </article>
-          ))}
+            );
+          })}
         </div>
 
         {/* 创始人引言：为什么做知识库 —— 卡片下方，全宽横排，仅左侧竖边 */}
