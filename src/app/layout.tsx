@@ -3,6 +3,7 @@ import { Inspector } from 'react-dev-inspector';
 import { BackToTop } from '@/components/a11y/back-to-top';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { AuthProvider } from '@/components/auth/auth-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -55,11 +56,13 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body>
-        <Inspector />
-        <Header />
-        {children}
-        <Footer />
-        <BackToTop />
+        <AuthProvider>
+          <Inspector />
+          <Header />
+          {children}
+          <Footer />
+          <BackToTop />
+        </AuthProvider>
       </body>
     </html>
   );
