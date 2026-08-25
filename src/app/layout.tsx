@@ -1,10 +1,20 @@
 import type { Metadata } from 'next';
-import { Inspector } from 'react-dev-inspector';
+import dynamic from 'next/dynamic';
 import { BackToTop } from '@/components/a11y/back-to-top';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { AuthProvider } from '@/components/auth/auth-provider';
 import './globals.css';
+
+// 仅开发环境加载页面审查工具（react-dev-inspector），生产构建不打包它
+const Inspector =
+  process.env.NODE_ENV === 'development'
+    ? dynamic(() =>
+        import('react-dev-inspector').then((mod) => ({
+          default: mod.Inspector,
+        })),
+      )
+    : () => null;
 
 export const metadata: Metadata = {
   title: {
